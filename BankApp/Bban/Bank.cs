@@ -18,13 +18,17 @@ namespace BankApp
             _accounts = new List<Account>();
         }
 
-        public Bank(List<Account> accounts, string name)
+        public Bank(string name, List<Account> accounts)
         {
-            _accounts = accounts;
             _name = name;
+            _accounts = accounts;
         }
 
-        
+        public override string ToString()
+        {
+            return $"{_name}";
+        }
+
         public string CreateAccount()
         {
             Random rnd = new Random();
@@ -49,6 +53,13 @@ namespace BankApp
             return (from account in _accounts
                     where account.AccountNumber == accountNumber
                     select account).FirstOrDefault().Balance;
+        }
+
+        public List<Transaction> GetTransactions(string accountNumber, DateTime startTime, DateTime endTime)
+        {
+            return (from account in _accounts
+                    where account.AccountNumber == accountNumber
+                    select account).FirstOrDefault().GetTransactionsForTimeSpan(startTime, endTime);
         }
     }
 }

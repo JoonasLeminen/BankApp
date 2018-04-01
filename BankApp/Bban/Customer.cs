@@ -21,10 +21,12 @@ namespace BankApp
         }
 
         public string AccountNumber { get => _accountNumber; set => _accountNumber = value; }
+        public string LastName { get => _lastName; set => _lastName = value; }
+        public string FirstName { get => _firstName; set => _firstName = value; }
 
         public override string ToString()
         {
-            return $"{_firstName}{_lastName}\t{_accountNumber}";
+            return $"{_firstName} {_lastName}\t{_accountNumber}";
         }
     }
 }

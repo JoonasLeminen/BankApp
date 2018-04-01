@@ -16,6 +16,7 @@ namespace BankApp
         public Account(string accountNumber)
         {
             _accountNumber = accountNumber;
+            _transactions = new List<Transaction>();
         }
 
         public Account(string accountNumber, double balance, List<Transaction> transactions)
@@ -44,6 +45,20 @@ namespace BankApp
                 res = true;
             }
             return res;
+        }
+
+        public List<Transaction> GetTransactionsForTimeSpan(DateTime startTime, DateTime endTime)
+        {
+            List<Transaction> res = (from transaction in _transactions
+                                     where transaction.Timestamp >= startTime && transaction.Timestamp <= endTime
+                                     orderby transaction.Timestamp
+                                     select transaction).ToList();
+            return res;
+        }
+
+        public override string ToString()
+        {
+            return $"{_balance:C}";
         }
     }
 }
